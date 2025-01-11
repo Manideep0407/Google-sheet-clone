@@ -7,61 +7,134 @@ A web-based spreadsheet application that mimics core functionalities of Google S
 ## Tech Stack & Data Structures
 
 ### Frontend Technologies
-- **React**: For building the user interface.
-- **TypeScript**: For type safety and better developer experience.
-- **Tailwind CSS**: For styling.
-- **Zustand**: For state management.
-- **Immer**: For immutable state updates.
-- **Lucide React**: For icons.
+- **React**: For building the user interface
+- **TypeScript**: For type safety and better developer experience
+- **Tailwind CSS**: For styling
+- **Zustand**: For state management
+- **Immer**: For immutable state updates
+- **Lucide React**: For icons
 
 ### Key Data Structures
-- **Sheet Data Model**: Uses a flat object structure for cells with compound keys (row-col) for O(1) access.
-  ```javascript
-  {
-    cells: {
-      "0-0": Cell,
-      "0-1": Cell,
-      // ...
-    }
-  }
-Cell Model: Contains properties like value, formula, computed value, dependencies, and format.
-typescript
-Copy code
-interface Cell {
-  id: string;
-  value: string;
-  formula: string;
-  computedValue: string | number | null;
-  dependencies: string[];
-  format: CellFormat;
-}
-Formula Evaluation
-Uses recursive descent parsing for formula evaluation.
-Maintains a dependency graph for formula updates.
-Prevents circular references.
-Performance Optimizations
-Virtual Rendering: Only renders visible cells.
-Memoization: Prevents unnecessary re-renders using React.memo.
-Efficient Updates: Uses Immer for immutable updates.
-Features
-Core Spreadsheet Features: Cell editing, formula support, range selection, column/row resizing.
-Mathematical Functions: SUM, AVERAGE, MAX, MIN, COUNT.
-Data Quality Functions: TRIM, UPPER, LOWER, REMOVE_DUPLICATES, FIND_AND_REPLACE.
-Data Validation: Type checking, formula validation, error handling.
-Why This Tech Stack?
-React + TypeScript: Strong type safety and excellent developer experience.
-Zustand: Lightweight and simple API for global state management.
-Tailwind CSS: Fast development with a consistent design system.
-Immer: Simplifies immutable state updates and reduces bugs.
-Future Improvements
-Performance: Implement WebWorkers for formula evaluation, and use IndexedDB for handling large datasets.
-Features: Add more formula functions, undo/redo functionality, collaborative editing, and data visualization.
-UI/UX: Add keyboard shortcuts, improve accessibility, and introduce more formatting options.
-Data Persistence: Integrate cloud storage for data backup, implement auto-save, and provide export options.
-Cloud Deployment & Security
-Deployment
-The application is deployed on Netlify for seamless continuous deployment and global access.
-Security Controls
-Data Security: Currently, the project does not handle sensitive data, but security measures like HTTPS and data encryption will be implemented in future updates.
-Authentication: Plans for user authentication and role-based access control to ensure data privacy.
-Input Validation: Strict validation to prevent malicious input and security vulnerabilities like SQL injection.
+
+1. **Sheet Data Model**
+   - Uses a flat object structure for cells with compound keys (`row-col`)
+   - Enables O(1) access to any cell
+   - Reduces memory usage compared to 2D arrays
+   ```typescript
+   {
+     cells: {
+       "0-0": Cell,
+       "0-1": Cell,
+       // ...
+     }
+   }
+   ```
+
+2. **Cell Model**
+   ```typescript
+   interface Cell {
+     id: string;
+     value: string;
+     formula: string;
+     computedValue: string | number | null;
+     dependencies: string[];
+     format: CellFormat;
+   }
+   ```
+
+3. **Formula Evaluation**
+   - Uses recursive descent parsing for formula evaluation
+   - Maintains a dependency graph for formula updates
+   - Prevents circular references
+
+### Performance Optimizations
+
+1. **Virtual Rendering**
+   - Only renders visible cells
+   - Improves performance with large datasets
+
+2. **Memoization**
+   - Uses React.memo for cell components
+   - Prevents unnecessary re-renders
+
+3. **Efficient Updates**
+   - Uses Immer for immutable updates
+   - Maintains referential equality for unchanged parts
+
+4. **Change Detection**
+   - Tracks cell dependencies
+   - Only updates affected cells when formulas change
+
+## Features
+
+### Core Spreadsheet Features
+- Cell editing and formatting
+- Formula support
+- Range selection
+- Column/row resizing
+
+### Mathematical Functions
+- SUM
+- AVERAGE
+- MAX
+- MIN
+- COUNT
+
+### Data Quality Functions
+- TRIM
+- UPPER
+- LOWER
+- REMOVE_DUPLICATES
+- FIND_AND_REPLACE
+
+### Data Validation
+- Type checking
+- Formula validation
+- Error handling
+
+## Why This Tech Stack?
+
+1. **React + TypeScript**
+   - Strong type safety
+   - Excellent developer experience
+   - Large ecosystem
+   - Great performance characteristics
+
+2. **Zustand**
+   - Lightweight
+   - Simple API
+   - Great performance
+   - Easy integration with React
+
+3. **Tailwind CSS**
+   - Rapid development
+   - Small bundle size
+   - Consistent styling
+   - Great developer experience
+
+4. **Immer**
+   - Simplifies immutable updates
+   - Reduces bugs
+   - Improves code readability
+
+## Future Improvements
+
+1. **Performance**
+   - Implement WebWorkers for formula evaluation
+   - Add IndexedDB for large dataset handling
+
+2. **Features**
+   - Add more formula functions
+   - Implement undo/redo
+   - Add collaborative editing
+   - Add data visualization
+
+3. **UI/UX**
+   - Add keyboard shortcuts
+   - Improve accessibility
+   - Add more formatting options
+
+4. **Data Persistence**
+   - Add cloud storage integration
+   - Implement auto-save
+   - Add export options
