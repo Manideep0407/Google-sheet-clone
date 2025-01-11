@@ -1,7 +1,7 @@
-# Google Sheets Clone
-https://googlesheetclonemanideep.netlify.app/
+Google Sheets Clone
+Live Demo
 
-A web-based spreadsheet application that mimics core functionalities of Google Sheets, built with React, TypeScript, and modern web technologies.
+A web-based spreadsheet application designed to mimic core functionalities of Google Sheets, built using React, TypeScript, and modern web technologies. This clone aims to provide users with the essential tools of a spreadsheet, including cell editing, formula support, data validation, and various mathematical and data quality functions.
 
 ## Tech Stack & Data Structures
 
@@ -137,3 +137,12 @@ A web-based spreadsheet application that mimics core functionalities of Google S
    - Add cloud storage integration
    - Implement auto-save
    - Add export options
+5.Cloud Deployment & Security
+Deployment:
+The application is deployed on Netlify, ensuring seamless continuous deployment and scaling. The platform allows fast global delivery, ensuring low-latency access to users across regions.
+
+Security Controls:
+
+Data Security: As of now, the project does not handle sensitive data; however, for production, measures like HTTPS, data encryption, and proper API authentication will be implemented.
+Authentication: Future updates will include user authentication and role-based access control to protect user data and enhance privacy.
+Input Validation: User inputs are strictly validated to avoid malicious entries or security breaches like SQL injection.     
